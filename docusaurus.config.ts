@@ -5,7 +5,7 @@ import type * as Preset from "@docusaurus/preset-classic";
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 const isProd = process.env.NODE_ENV === "production";
-const baseUrl = isProd ? "/azsce_database/" : "/";
+const baseUrl = isProd ? "/Databases/" : "/";
 
 const config: Config = {
   title: "Database",
@@ -96,7 +96,7 @@ const config: Config = {
           label: "Content",
         },
         {
-          href: "https://github.com/azsce/azsce_database",
+          href: "https://github.com/azsce/Databases",
           label: "GitHub",
           position: "right",
         },
@@ -119,7 +119,7 @@ const config: Config = {
           items: [
             {
               label: "GitHub",
-              href: "https://github.com/azsce/azsce_database",
+              href: "https://github.com/azsce/Databases",
             },
           ],
         },
