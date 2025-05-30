@@ -29,6 +29,12 @@
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
 
+code {
+  background-color: rgb(62, 63, 3) !important;
+  color: rgb(192, 196, 193) !important;
+  border: 1px solid rgb(225, 221, 183) !important;
+}
+
 @media print {
   .page-break {
     page-break-before: always;
