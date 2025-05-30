@@ -1,3 +1,5 @@
+import IdealImage from '@theme/IdealImage';
+
 # Database System Concepts and Architecture
 
 ## Data Models
@@ -189,57 +191,21 @@
     - Usually uses the same data model as the conceptual schema.
 
 
-```mermaid
-graph TD
-    subgraph EndUsers["End Users"]
-        U1["🧍<br/>User"]
-        U2["🧍<br/>User"]
-    end
-
-    subgraph ExternalLevel["External Level"]
-        direction TB
-        EV1["External<br/>View"]
-        Ellipsis1["..."]
-        EV2["External<br/>View"]
-    end
-
-    subgraph ConceptualLevel["Conceptual Level"]
-        direction TB
-        CS["Conceptual Schema"]
-    end
-
-    subgraph InternalLevel["Internal Level"]
-        direction TB
-        IS["Internal Schema"]
-    end
-
-    subgraph StoredDB["Stored Database"]
-        direction LR
-        DB1["🛢️<br/>Disk"]
-        DB2["🛢️<br/>Disk"]
-        DB3["🛢️<br/>Disk"]
-    end
-
-    U1 --> EV1
-    U2 --> EV2
-
-    EV1 -->|External/Conceptual<br/>Mapping| CS
-    Ellipsis1 --> CS
-    EV2 -->|External/Conceptual<br/>Mapping| CS
-
-    CS -->|Conceptual/Internal<br/>Mapping| IS
-    IS --> StoredDB
-
-    classDef user fill:#7c93a8,stroke:#2a3f5a,stroke-width:2px,color:#fff;
-    classDef level fill:#485e75,stroke:#2a3f5a,stroke-width:1px,color:#fff;
-    classDef schema fill:#5b7086,stroke:#2a3f5a,stroke-width:2px,color:#fff;
-    classDef db fill:#435468,stroke:#2a3f5a,stroke-width:2px,color:#fff;
-
-    class U1,U2 user;
-    class ExternalLevel,ConceptualLevel,InternalLevel level;
-    class EV1,Ellipsis1,EV2,CS,IS schema;
-    class StoredDB,DB1,DB2,DB3 db;
-```
+<div style={{ 
+    margin: '0 2rem 1rem 0',
+    background: 'transparent',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+}}>
+    <IdealImage
+        img={require('@site/static/img/2/2.1.png')}
+        style={{
+            objectFit: 'cover',
+            borderRadius: '8px',
+        }}
+    />
+</div>
 
 
 • Mappings among schema levels are needed to transform requests and data.
@@ -407,86 +373,21 @@ Programmer interfaces for embedding DML in a programming languages:
 
 ## Typical DBMS Component Modules
 
-```mermaid
-graph TD
-    classDef UserType fill:#D6EAF8,stroke:#2E86C1,stroke-width:2px,color:#000;
-    classDef Processor fill:#E8DAEF,stroke:#8E44AD,stroke-width:2px,color:#000;
-    classDef Compiler fill:#D5F5E3,stroke:#28B463,stroke-width:2px,color:#000;
-    classDef Storage fill:#FCF3CF,stroke:#F1C40F,stroke-width:2px,color:#000;
-    classDef Subsystem fill:#FDEDEC,stroke:#E74C3C,stroke-width:2px,color:#000;
-    classDef Data fill:#FEF9E7,stroke:#F39C12,stroke-width:2px,color:#000;
-
-    subgraph Users
-        DBA["DBA Staff"]:::UserType
-        Casual["Casual Users"]:::UserType
-        AppProg["Application<br/>Programmers"]:::UserType
-        Parametric["Parametric Users"]:::UserType
-    end
-
-    subgraph QueryAndTransactionExecution["Query and Transaction Execution"]
-        direction LR
-        subgraph QueryProcessing ["Query Processor Components"]
-            DDLCompiler["DDL<br/>Compiler"]:::Compiler
-            QueryCompiler["Query<br/>Compiler"]:::Compiler
-            QueryOptimizer["Query<br/>Optimizer"]:::Processor
-            Precompiler["Precompiler"]:::Compiler
-            HostLangCompiler["Host<br/>Language<br/>Compiler"]:::Compiler
-            DMLCompiler["DML<br/>Compiler"]:::Compiler
-        end
-
-        subgraph RuntimeComponents ["Runtime Components"]
-            RuntimeProcessor["Runtime<br/>Database<br/>Processor"]:::Processor
-            SystemCatalog["System<br/>Catalog/<br/>Data<br/>Dictionary"]:::Storage
-            CompiledTransactions["Compiled<br/>Transactions"]
-        end
-
-        subgraph StorageManager ["Storage Manager Components"]
-            ConcurrencyControl["Concurrency Control/<br/>Backup/Recovery<br/>Subsystems"]:::Subsystem
-            StoredDataManager["Stored<br/>Data<br/>Manager"]:::Processor
-            StoredDB["Stored Database<br/>(Physical Storage)"]:::Data
-            DBIO["Input/Output<br/>from Database"]
-        end
-    end
-
-    %% User Inputs
-    DBA --> DDLStmts{"DDL<br/>Statements"} --> DDLCompiler
-    DBA --> PrivCmds{"Privileged<br/>Commands"} --> RuntimeProcessor
-    Casual --> IntQuery{"Interactive<br/>Query"} --> QueryCompiler
-    AppProg --> AppProgs{"Application<br/>Programs"} --> Precompiler
-    Parametric --> CompiledTransactions
-
-    %% Compilation Flow
-    QueryCompiler --> QueryOptimizer
-    Precompiler --> HostLangCompiler
-    QueryOptimizer --> DMLCompiler
-    HostLangCompiler --> CompiledTransactions
-    DMLCompiler --> CompiledTransactions
-
-    %% Runtime Flow
-    DDLCompiler --> SystemCatalog
-    QueryOptimizer --> SystemCatalog
-    CompiledTransactions --> RuntimeProcessor
-    DBAcmds{"DBA Commands,<br/>Queries, and Transactions"} --> RuntimeProcessor
-
-    %% Runtime Processor Interactions
-    RuntimeProcessor --> SystemCatalog
-    RuntimeProcessor <--> ConcurrencyControl
-    RuntimeProcessor --> StoredDataManager
-
-    %% Storage Manager Interactions
-    StoredDataManager <--> StoredDB
-    StoredDB <--> DBIO
-    ConcurrencyControl --> StoredDataManager
-
-
-    %% System Catalog interactions
-    SystemCatalog -.-> DDLCompiler
-    SystemCatalog -.-> QueryCompiler
-    SystemCatalog -.-> QueryOptimizer
-    SystemCatalog -.-> DMLCompiler
-    SystemCatalog -.-> RuntimeProcessor
-
-```
+<div style={{ 
+    margin: '0 2rem 1rem 0',
+    background: 'transparent',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+}}>
+    <IdealImage
+        img={require('@site/static/img/2/2.2.png')}
+        style={{
+            objectFit: 'cover',
+            borderRadius: '8px',
+        }}
+    />
+</div>
 
 
 ---
@@ -503,89 +404,47 @@ graph TD
 
 ### A Physical Centralized Architecture
 
-```mermaid
-graph TB
-    subgraph Terminals
-        T1["Display<br/>Monitor"]
-        T2["Display<br/>Monitor"]
-        T3["..."]
-        T4["Display<br/>Monitor"]
-    end
-
-    subgraph Network
-        Net["Network"]
-    end
-
-    T1 --- Net
-    T2 --- Net
-    T3 --- Net
-    T4 --- Net
-
-    subgraph CentralizedSystem["Centralized System"]
-        direction TB
-        subgraph Software["Software"]
-            AppProgs["Application<br/>Programs"]
-            TermCtrl["Terminal<br/>Display Control"]
-            TextEdit["Text<br/>Editors"]
-            DBMS["DBMS"]
-            Compilers["Compilers"]
-            SWOther["..."]
-        end
-
-        OS["Operating System"]
-
-        subgraph HardwareFirmware["Hardware/Firmware"]
-            CPU["CPU"]
-
-            subgraph SystemBusGroup["System Bus"]
-                Controller1["Controller"]
-                Controller2["Controller"]
-                Controller3["Controller"]
-                ControllerOther["..."]
-
-                CPU --- SystemBus["System Bus"]
-                SystemBus --- Controller1
-                SystemBus --- Controller2
-                SystemBus --- Controller3
-                SystemBus --- ControllerOther
-            end
-
-            Memory["Memory"]
-            Disk["Disk"]
-            IODevice["I/O Devices<br/>(Printers,<br/>Tape Drives, ...)"]
-            HWOther["..."]
-
-            Controller1 --- Memory
-            Controller2 --- Disk
-            Controller3 --- IODevice
-            ControllerOther --- HWOther
-        end
-        Software --> OS
-        OS --> HardwareFirmware
-    end
-
-    Net --> TermCtrl
-
-    classDef terminal fill:#7c93a8,stroke:#2a3f5a,stroke-width:2px,color:#fff;
-    classDef system fill:#5b7086,stroke:#2a3f5a,stroke-width:2px,color:#fff;
-    classDef software fill:#485e75,stroke:#2a3f5a,stroke-width:1px,color:#fff;
-    classDef hardware fill:#435468,stroke:#2a3f5a,stroke-width:2px,color:#fff;
-    classDef bus fill:#374857,stroke:#2a3f5a,stroke-width:3px,color:#fff;
-    classDef network fill:#6b8096,stroke:#2a3f5a,stroke-width:2px,color:#fff;
-
-    class T1,T2,T3,T4 terminal;
-    class CentralizedSystem system;
-    class AppProgs,TermCtrl,TextEdit,DBMS,Compilers,SWOther,OS software;
-    class CPU,Controller1,Controller2,Controller3,ControllerOther,Memory,Disk,IODevice,HWOther hardware;
-    class SystemBus,SystemBusGroup bus;
-    class Net,Network network;
-```
+<div style={{ 
+    margin: '0 2rem 1rem 0',
+    background: 'transparent',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+}}>
+    <IdealImage
+        img={require('@site/static/img/2/2.3.png')}
+        style={{
+            objectFit: 'cover',
+            borderRadius: '8px',
+        }}
+    />
+</div>
 
 <div class="page-break"></div>
 
 ## Basic 2-tier Client-Server Architectures
 
+
 • **Specialized Servers with Specialized functions**
+
+<div style={{ 
+    float: 'right',
+    margin: '0 2rem 1rem 0',
+    background: 'transparent',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+}}>
+    <IdealImage
+        img={require('@site/static/img/2/2.4.png')}
+        style={{
+            width: 400,
+            objectFit: 'cover',
+            borderRadius: '8px',
+        }}
+    />
+</div>
+
 
 - Print server
 - File server
@@ -593,38 +452,6 @@ graph TB
 - Web server
 - Email server
 
-```mermaid
-graph TD
-    classDef Client fill:#lightblue,stroke:#333,stroke-width:2px;
-    classDef Server fill:#lightgreen,stroke:#333,stroke-width:2px;
-    classDef Network fill:#eee,stroke:#333,stroke-width:2px,rx:5px,ry:5px;
-
-    subgraph Clients
-        C1["Client"]:::Client
-        C2["Client"]:::Client
-        C3["Client"]:::Client
-        Cdots["..."]:::Client
-    end
-
-    Net["Network"]:::Network
-
-    subgraph Servers
-        S_Print["Print<br/>Server"]:::Server
-        S_File["File<br/>Server"]:::Server
-        S_DBMS["DBMS<br/>Server"]:::Server
-        S_dots["..."]:::Server
-    end
-
-    C1 --> Net
-    C2 --> Net
-    C3 --> Net
-    Cdots --> Net
-
-    Net --> S_Print
-    Net --> S_File
-    Net --> S_DBMS
-    Net --> S_dots
-```
 
 • Clients can access the specialized servers as needed
 
@@ -681,31 +508,21 @@ graph TD
   - Clients contain user interfaces and Web browsers
   - The client is typically a PC or a mobile device connected to the Web
 
-```mermaid
-graph TD
-    classDef Layer fill:#f0f8ff,stroke:#4682b4,stroke-width:2px,color:black;
-    classDef TierLabel fill:none,stroke:none,font-weight:bold,font-size:14px;
-
-    subgraph Architecture_A ["(a) Component View"]
-        direction TB
-        Client_A["Client:<br/>GUI,<br/>Web Interface"]:::Layer
-        AppServer_A["Application Server<br/>or<br/>Web Server:<br/>Application Programs,<br/>Web Pages"]:::Layer
-        DBServer_A["Database Server:<br/>Database<br/>Management<br/>System"]:::Layer
-
-        Client_A <--> AppServer_A
-        AppServer_A <--> DBServer_A
-    end
-
-    subgraph Architecture_B ["(b) Layered View"]
-        direction TB
-        PresLayer_B["Client:<br/>Presentation<br/>Layer"]:::Layer
-        BizLogic_B["Application Server<br/>or<br/>Web Server:<br/>Business<br/>Logic Layer"]:::Layer
-        DataSvc_B["Database Server:<br/>Database<br/>Services<br/>Layer"]:::Layer
-
-        PresLayer_B <--> BizLogic_B
-        BizLogic_B <--> DataSvc_B
-    end
-```
+<div style={{ 
+    margin: '0 2rem 1rem 0',
+    background: 'transparent',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+}}>
+    <IdealImage
+        img={require('@site/static/img/2/2.5.png')}
+        style={{
+            objectFit: 'cover',
+            borderRadius: '8px',
+        }}
+    />
+</div>
 ---
 <div class="page-break"></div>
 

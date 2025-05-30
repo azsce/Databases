@@ -1,3 +1,5 @@
+import IdealImage from '@theme/IdealImage';
+
 ## What is data, database, DBMS
 
 - Data: Known facts that can be recorded and have an implicit meaning; raw
@@ -74,7 +76,10 @@
 
 <div class="page-break"></div>
 
+
 ## Lifecycle of Data: 4 "A"s
+
+<div aria-hidden="true" role="presentation">
 
 ```mermaid
 graph TD
@@ -86,6 +91,7 @@ graph TD
     classDef default fill:#455a64,stroke:#fff,color:#fff
     class A,B,C,D default
 ```
+</div>
 
 ---
 
@@ -93,57 +99,149 @@ graph TD
 
 ## Computational View of Big Data
 
+<div aria-hidden="true" role="presentation">
+
 ```mermaid
+%%{init: {
+  'theme': 'base',
+  'themeVariables': {
+    'primaryColor': '#ec4899',
+    'primaryTextColor': '#ffffff',
+    'primaryBorderColor': '#be185d',
+    'lineColor': '#ec4899',
+    'secondaryColor': '#3b82f6',
+    'tertiaryColor': '#10b981',
+    'background': 'transparent',
+    'mainBkg': '#1f2937',
+    'secondBkg': '#374151',
+    'fontFamily': 'Arial, sans-serif'
+  }
+}}%%
+
 graph TD
-    subgraph ComputationalFlow ["Computational Flow"]
-        direction TB
-        DataInput[("Data")] --> Storage[("Storage")]
-        Storage --> FormattingCleaning["Formatting & Cleaning"]
-        FormattingCleaning --> DataUnderstanding["Data Understanding"]
-        DataUnderstanding --> DataAccess["Data Access"]
-        DataAccess --> DataVisualization["Data Visualization"]
-        DataUnderstanding --> DataIntegration["Data Integration"]
-        DataIntegration --> DataAnalysis["Data Analysis"]
-        DataAnalysis --> DataVisualization
-    end
+    Data[Data]:::dataNode
+    Storage[Storage]:::processNode
+    Formatting[Formatting, Cleaning]:::processNode
+    Understanding[Data Understanding]:::processNode
+    Access[Data Access]:::processNode
+    Integration[Data Integration]:::processNode
+    Analysis[Data Analysis]:::processNode
+    Visualization[Data Visualization]:::finalNode
 
-    classDef default fill:#455a64,stroke:#fff,color:#fff
-    classDef flow fill:#37474f,stroke:#fff,color:#fff
-    classDef data fill:#263238,stroke:#fff,color:#fff
+    Data ==> Storage
+    Storage ==> Formatting
+    Formatting ==> Understanding
+    Understanding ==> Access
+    Understanding ==> Integration
+    Access ==> Visualization
+    Integration ==> Analysis
+    Analysis ==> Visualization
 
-    class ComputationalFlow flow
-    class DataInput,Storage data
-    class DataVisualization,DataAnalysis,DataIntegration,DataUnderstanding,DataAccess,FormattingCleaning default
+    classDef dataNode fill:#10b981,stroke:#059669,stroke-width:3px,color:#ffffff,font-weight:bold,font-size:14px
+    classDef processNode fill:#1f2937,stroke:#ec4899,stroke-width:2px,color:#ffffff,font-weight:normal,font-size:12px
+    classDef finalNode fill:#1f2937,stroke:#ec4899,stroke-width:3px,color:#ffffff,font-weight:bold,font-size:14px
+
+    linkStyle 0 stroke:#ec4899,stroke-width:4px
+    linkStyle 1 stroke:#ec4899,stroke-width:4px
+    linkStyle 2 stroke:#ec4899,stroke-width:4px
+    linkStyle 3 stroke:#ec4899,stroke-width:4px
+    linkStyle 4 stroke:#ec4899,stroke-width:4px
+    linkStyle 5 stroke:#ec4899,stroke-width:4px
+    linkStyle 6 stroke:#ec4899,stroke-width:4px
+    linkStyle 7 stroke:#ec4899,stroke-width:4px
 ```
+</div>
 
 ---
 
 ## Big Data & Related Disciplines
 
+<div aria-hidden="true" role="presentation">
+
 ```mermaid
+%%{init: {
+  'theme': 'base',
+  'themeVariables': {
+    'primaryColor': '#ec4899',
+    'primaryTextColor': '#ffffff',
+    'primaryBorderColor': '#be185d',
+    'lineColor': '#ec4899',
+    'secondaryColor': '#3b82f6',
+    'tertiaryColor': '#10b981',
+    'background': 'transparent',
+    'mainBkg': '#1f2937',
+    'secondBkg': '#374151',
+    'fontFamily': 'Arial, sans-serif'
+  }
+}}%%
+
 graph TD
-    subgraph "Database Architecture Levels"
-        direction TB
-        ViewLevel["View Level<br/>(view 1, view 2, ..., view n)"]
-        LogicalLevel["Logical Level"]
-        PhysicalLevel["Physical Level"]
-        ViewLevel --> LogicalLevel
-        LogicalLevel --> PhysicalLevel
-    end
+    HCI[Human-Computer Interaction]:::headerNode
+    DataViz[Data Visualization]:::processNode
+    Data[Data]:::dataNode
+    Storage[Storage]:::processNode
+    Formatting[Formatting, Cleaning]:::processNode
+    DataUnderstanding[Data Understanding]:::processNode
+    DataAccess[Data Access]:::processNode
+    DataIntegration[Data Integration]:::processNode
+    DataAnalysis[Data Analysis]:::processNode
 
-    subgraph "Example View Definition"
-        Code["type instructor = record<br/>  ID string;<br/>  name string;<br/>  dept_name: string;<br/>  salary: integer;<br/>end;<br/><br/>(Associated with View Level / Logical Level)"]
-    end
+    %% Left side labels
+    InfoTheory[Information Theory]:::labelNode
+    SignalProcessing[Signal Processing]:::labelNode
+    NLP[Natural Language Processing]:::labelNode
+    ComputerVision[Computer Vision]:::labelNode
+    Databases[Databases]:::labelNode
+    InfoRetrieval[Information Retrieval]:::labelNode
 
-    ViewLevel -.-> Code
-    LogicalLevel -.-> Code
+    %% Right side labels
+    ManyApps[Many Applications!]:::labelNode
+    DataWarehousing[Data Warehousing]:::labelNode
+    DataMining[Data Mining]:::labelNode
+    MachineLearning[Machine Learning]:::labelNode
+    SpeechRecognition[Speech Recognition]:::labelNode
 
-    classDef levels fill:#2a4858,stroke:#fff,color:#fff
-    classDef code fill:#37474f,stroke:#fff,color:#fff
+    %% Main flow
+    Data ==> Storage
+    Storage ==> Formatting
+    Formatting ==> DataUnderstanding
+    DataUnderstanding ==> DataAccess
+    DataUnderstanding ==> DataIntegration
+    DataAccess ==> DataViz
+    DataIntegration ==> DataAnalysis
+    DataAnalysis ==> DataViz
+    DataViz ==> HCI
 
-    class ViewLevel,LogicalLevel,PhysicalLevel levels
-    class Code code
+    %% Side connections (dotted to show associations)
+    InfoTheory -.-> Storage
+    SignalProcessing -.-> Formatting
+    NLP -.-> DataUnderstanding
+    ComputerVision -.-> DataUnderstanding
+    SpeechRecognition -.-> DataUnderstanding
+    Databases -.-> DataAccess
+    InfoRetrieval -.-> DataAccess
+
+    DataWarehousing -.-> DataIntegration
+    DataMining -.-> DataAnalysis
+    MachineLearning -.-> DataAnalysis
+    HCI -.-> ManyApps
+
+    classDef headerNode fill:#3b82f6,stroke:#1e40af,stroke-width:3px,color:#ffffff,font-weight:bold,font-size:16px
+    classDef dataNode fill:#10b981,stroke:#059669,stroke-width:3px,color:#ffffff,font-weight:bold,font-size:14px
+    classDef processNode fill:#1f2937,stroke:#ec4899,stroke-width:2px,color:#ffffff,font-weight:normal,font-size:12px
+    classDef labelNode fill:#4338ca,stroke:#3730a3,stroke-width:1px,color:#ffffff,font-weight:normal,font-size:11px
+
+    linkStyle 0 stroke:#ec4899,stroke-width:4px
+    linkStyle 1 stroke:#ec4899,stroke-width:4px
+    linkStyle 2 stroke:#ec4899,stroke-width:4px
+    linkStyle 3 stroke:#ec4899,stroke-width:4px
+    linkStyle 4 stroke:#ec4899,stroke-width:4px
+    linkStyle 5 stroke:#ec4899,stroke-width:4px
+    linkStyle 6 stroke:#ec4899,stroke-width:4px
+    linkStyle 7 stroke:#ec4899,stroke-width:4px
+    linkStyle 8 stroke:#ec4899,stroke-width:4px
 ```
+</div>
 
 ---
 
@@ -182,33 +280,33 @@ graph TD
 
 **View level:** what application programs see; views can also hide information (such as an instructor's salary) for security purposes.
 
+<div aria-hidden="true" role="presentation">
+
 ```mermaid
 graph TD
-    UsersProgrammers["Users/Programmers"] --> AppQueries["Application Programs/Queries"]
-
-    subgraph DBMS_Software ["DBMS Software"]
-        AppQueries --> SoftwareProcess["Software to Process Queries/Programs"]
-        SoftwareProcess --> SoftwareAccess["Software to Access Stored Data"]
+    subgraph "Database Architecture Levels"
+        direction TB
+        ViewLevel["View Level<br/>(view 1, view 2, ..., view n)"]
+        LogicalLevel["Logical Level"]
+        PhysicalLevel["Physical Level"]
+        ViewLevel --> LogicalLevel
+        LogicalLevel --> PhysicalLevel
     end
 
-    subgraph Stored_Data_Layer ["Stored Data Layer"]
-        StoredDBDef["Stored Database Definition (Meta-Data)"]
-        StoredDB["Stored Database"]
+    subgraph "Example View Definition"
+        Code["type instructor = record<br/>  ID string;<br/>  name string;<br/>  dept_name: string;<br/>  salary: integer;<br/>end;<br/><br/>(Associated with View Level / Logical Level)"]
     end
 
-    SoftwareAccess --> StoredDBDef
-    SoftwareAccess --> StoredDB
+    ViewLevel -.-> Code
+    LogicalLevel -.-> Code
 
-    classDef default fill:#455a64,stroke:#fff,color:#fff
-    classDef software fill:#37474f,stroke:#fff,color:#fff
-    classDef storage fill:#263238,stroke:#fff,color:#fff
-    
-    class UsersProgrammers,AppQueries default
-    class DBMS_Software software
-    class Stored_Data_Layer storage
-    class SoftwareProcess,SoftwareAccess software
-    class StoredDBDef,StoredDB storage
+    classDef levels fill:#2a4858,stroke:#fff,color:#fff
+    classDef code fill:#37474f,stroke:#fff,color:#fff
+
+    class ViewLevel,LogicalLevel,PhysicalLevel levels
+    class Code code
 ```
+</div>
 
 ---
 
@@ -216,170 +314,59 @@ graph TD
 
 ## A simplified database system environment.
 
-```mermaid
-graph TD
-    UsersProgrammers["Users/Programmers"] --> AppQueries["Application Programs/Queries"]
+<div style={{ 
+    margin: '0 2rem 1rem 0',
+    background: 'transparent',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+}}>
+    <IdealImage
+        img={require('@site/static/img/1/1.1.png')}
+        style={{
+            objectFit: 'cover',
+            borderRadius: '8px',
+        }}
+    />
+</div>
 
-    subgraph DBMS_Software ["DBMS Software"]
-        AppQueries --> SoftwareProcess["Software to Process Queries/Programs"]
-        SoftwareProcess --> SoftwareAccess["Software to Access Stored Data"]
-    end
-
-    subgraph Stored_Data_Layer ["Stored Data Layer"]
-        StoredDBDef["Stored Database Definition (Meta-Data)"]
-        StoredDB["Stored Database"]
-    end
-
-    SoftwareAccess --> StoredDBDef
-    SoftwareAccess --> StoredDB
-
-    classDef default fill:#455a64,stroke:#fff,color:#fff
-    classDef software fill:#37474f,stroke:#fff,color:#fff
-    classDef storage fill:#263238,stroke:#fff,color:#fff
-
-    class UsersProgrammers,AppQueries default
-    class DBMS_Software software
-    class Stored_Data_Layer storage
-    class SoftwareProcess,SoftwareAccess software
-    class StoredDBDef,StoredDB storage
-```
+<div style={{ 
+    margin: '0 2rem 1rem 0',
+    background: 'transparent',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+}}>
+    <IdealImage
+        img={require('@site/static/img/1/1.2.png')}
+        style={{
+            objectFit: 'cover',
+            borderRadius: '8px',
+        }}
+    />
+</div>
 
 ---
 
 <div class="page-break"></div>
 
-```mermaid
-graph TD
-    subgraph Users
-        direction LR
-        DBA["DBA Staff"]
-        Casual["Casual Users"]
-        AppProg["Application Programmers"]
-        Parametric["Parametric Users"]
-    end
-
-    subgraph ProcessingPipeline
-        direction TB
-
-        DBA --> DDLStatements["DDL Statements"]
-        DDLStatements --> DDLCompiler["DDL Compiler"]
-        DBA --> PrivilegedCommands["Privileged Commands"]
-
-        Casual --> InteractiveQuery["Interactive Query"]
-        InteractiveQuery --> QueryCompiler["Query Compiler"]
-        QueryCompiler --> QueryOptimizer["Query Optimizer"]
-
-        AppProg --> ApplicationPrograms["Application Programs"]
-        ApplicationPrograms --> Precompiler["Precompiler"]
-
-        Parametric --> HostLangProg["Host Language Program (Implicit)"]
-        HostLangProg --> HostLangCompiler["Host Language Compiler"]
-        HostLangCompiler --> CompiledTransactions["Compiled Transactions"]
-        Precompiler --> DMLCompiler["DML Compiler"]
-
-        QueryOptimizer --> RuntimeDBProcessor["Runtime Database Processor"]
-        DMLCompiler --> RuntimeDBProcessor
-        CompiledTransactions --> RuntimeDBProcessor
-        PrivilegedCommands --> RuntimeDBProcessor
-        DDLCompiler --> RuntimeDBProcessor
-
-        subgraph SystemCore
-            RuntimeDBProcessor
-            SystemCatalog["System Catalog/Data Dictionary"]
-            ConcurrencyControl["Concurrency Control/Backup/Recovery Subsystems"]
-            StoredDataManager["Stored Data Manager"]
-        end
-
-        RuntimeDBProcessor <--> SystemCatalog
-        RuntimeDBProcessor --> ConcurrencyControl
-        RuntimeDBProcessor --> StoredDataManager
-
-        StoredDataManager <--> StoredDB["Stored Database"]
-        StoredDataManager --> Output["Input/Output from Database"]
-    end
-
-    classDef dba fill:#4527a0,stroke:#fff,color:#fff
-    classDef casual fill:#00695c,stroke:#fff,color:#fff
-    classDef appProg fill:#283593,stroke:#fff,color:#fff
-    classDef parametric fill:#ad1457,stroke:#fff,color:#fff
-    classDef runtime fill:#37474f,stroke:#fff,color:#fff
-    classDef catalog fill:#1565c0,stroke:#fff,color:#fff
-    classDef storage fill:#2a4858,stroke:#fff,color:#fff
-    classDef default fill:#455a64,stroke:#fff,color:#fff
-
-    class DBA dba
-    class Casual casual
-    class AppProg appProg
-    class Parametric parametric
-    class RuntimeDBProcessor runtime
-    class SystemCatalog catalog
-    class StoredDB storage
-```
-_Query and Transaction Execution flows generally from users through compilers/optimizers to the Runtime Database Processor, which interacts with the System Catalog, Concurrency Control, and Stored Data Manager to access the Stored Database._
-
 ---
 
-```mermaid
-graph TD
-    subgraph QueryProcessor ["Query Processor"]
-        direction TB
-        CompilerLinker["compiler and linker"] --> AppObjectCode["application program object code"]
-        AppObjectCode --> QueryEvalEngine["query evaluation engine"]
-
-        DMLQueries["DML queries"] --> DMLCompilerOrg["DML compiler and organizer"]
-        DMLCompilerOrg --> QueryEvalEngine
-
-        DDLInterpreter["DDL interpreter"] --> QueryEvalEngine
-    end
-
-    subgraph StorageManager ["Storage Manager"]
-        direction TB
-        BufferMgr["buffer manager"]
-        FileMgr["file manager"]
-        AuthIntegrityMgr["authorization and integrity manager"]
-        TransactionMgr["transaction manager"]
-    end
-
-    subgraph DiskStorage ["Disk Storage"]
-        direction TB
-        Data["data"]
-        Indices["indices"]
-        DataDict["data dictionary"]
-        StatsData["statistical data"]
-    end
-
-    QueryEvalEngine --> BufferMgr
-    QueryEvalEngine --> FileMgr
-    QueryEvalEngine --> AuthIntegrityMgr
-    QueryEvalEngine --> TransactionMgr
-
-    DDLInterpreter --> DataDict
-
-    BufferMgr --> Data
-    BufferMgr --> Indices
-    BufferMgr --> DataDict
-    BufferMgr --> StatsData
-
-    FileMgr --> Data
-    FileMgr --> Indices
-    FileMgr --> DataDict
-    FileMgr --> StatsData
-
-    AuthIntegrityMgr --> DataDict
-    TransactionMgr --> Data
-
-    classDef processor fill:#2a4858,stroke:#fff,color:#fff
-    classDef storage fill:#37474f,stroke:#fff,color:#fff
-    classDef disk fill:#263238,stroke:#fff,color:#fff
-    classDef engine fill:#455a64,stroke:#fff,color:#fff
-    classDef dict fill:#546e7a,stroke:#fff,color:#fff
-
-    class QueryProcessor processor
-    class StorageManager storage
-    class DiskStorage disk
-    class QueryEvalEngine engine
-    class DataDict dict
-```
+<div style={{ 
+    margin: '0 2rem 1rem 0',
+    background: 'transparent',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+}}>
+    <IdealImage
+        img={require('@site/static/img/1/1.3.png')}
+        style={{
+            objectFit: 'cover',
+            borderRadius: '8px',
+        }}
+    />
+</div>
 
 ---
 
@@ -485,20 +472,20 @@ Figure 1.2 A database that stores student and course information.
 
 ## The relational model
 
-| ID    | name      | dept_name  | salary |
-| :---- | :-------- | :--------- | :----- |
-| 22222 | Einstein  | Physics    | 95000  | &lt;--
-| 12121 | Wu        | Finance    | 90000  |
-| 32343 | El Said   | History    | 60000  |
-| 45565 | Katz      | Comp. Sci. | 75000  | **Rows**
-| 98345 | Kim       | Elec. Eng. | 80000  |
-| 76766 | Crick     | Biology    | 72000  |
-| 10101 | Srinivasan| Comp. Sci. | 65000  |
-| 58583 | Califieri | History    | 62000  |
-| 83821 | Brandt    | Comp. Sci. | 92000  |
-| 15151 | Mozart    | Music      | 40000  |
-| 33456 | Gold      | Physics    | 87000  |
-| 76543 | Singh     | Finance    | 80000  | &lt;--
+| ID    | name       | dept_name  | salary |
+| :---- | :--------- | :--------- | :----- | -------- |
+| 22222 | Einstein   | Physics    | 95000  | &lt;--   |
+| 12121 | Wu         | Finance    | 90000  |
+| 32343 | El Said    | History    | 60000  |
+| 45565 | Katz       | Comp. Sci. | 75000  | **Rows** |
+| 98345 | Kim        | Elec. Eng. | 80000  |
+| 76766 | Crick      | Biology    | 72000  |
+| 10101 | Srinivasan | Comp. Sci. | 65000  |
+| 58583 | Califieri  | History    | 62000  |
+| 83821 | Brandt     | Comp. Sci. | 92000  |
+| 15151 | Mozart     | Music      | 40000  |
+| 33456 | Gold       | Physics    | 87000  |
+| 76543 | Singh      | Finance    | 80000  | &lt;--   |
 
 ---
 
@@ -598,9 +585,9 @@ _Note: Major_type is defined as an enumerated type with all known majors. XXXXNN
     - An example is the user of a tax program that creates its own internal database.
     - Another example is a user that maintains a database of personal photos and videos.
   - **System analysts and application developers:**
-	  - **System analysts**: They understand the user requirements of naïve and sophisticated users and design applications including canned transactions to meet those requirements.
-	  - **Application programmers**: Implement the specifications developed by analysts and test and debug them before deployment.
-	  - **Business analysts**: There is an increasing need for such people who can analyze vast amounts of business data and real-time data ("Big Data") for better decision making related to planning, advertising, marketing etc.
+    - **System analysts**: They understand the user requirements of naïve and sophisticated users and design applications including canned transactions to meet those requirements.
+    - **Application programmers**: Implement the specifications developed by analysts and test and debug them before deployment.
+    - **Business analysts**: There is an increasing need for such people who can analyze vast amounts of business data and real-time data ("Big Data") for better decision making related to planning, advertising, marketing etc.
 
 ---
 
@@ -649,6 +636,7 @@ _Note: Major_type is defined as an enumerated type with all known majors. XXXXNN
   - Wasteful overlap of resources and personnel can be avoided by consolidating data and applications across departments.
 
 ---
+
 <div class="page-break"></div>
 
 ## Historical Development of Database Technology
