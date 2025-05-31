@@ -16,7 +16,7 @@ Please convert the provided content into well-formatted Markdown. Adhere strictl
     *   If a diagram or concept is referenced across "slides" with slightly different titles (e.g., "A simplified architecture for a database system" vs. "A simplified database system environment"), use the most descriptive title or the first one encountered for that recurring element.
 
 **III. Structural Elements:**
-*   **Page Breaks:** Insert `<div class="page-break"></div>` after each main section or logical grouping of content that signifies a new "page" or a significant shift in topic.
+*   **Page Breaks:** Insert `\n --- \n <div class="page-break"></div>` after each main section or logical grouping of content that signifies a new "page" or a significant shift in topic.
 *   **Horizontal Rules:** Use `---` to separate distinct content blocks within a larger section where a full page break is not appropriate but a visual separation is beneficial.
 
 **IV. Table Formatting:**

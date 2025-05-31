@@ -86,7 +86,7 @@ const config: Config = {
       title: "Database",
       logo: {
         alt: "logo",
-        src: "img/favicon.png",
+        src: "img/logo.png",
       },
       items: [
         {
