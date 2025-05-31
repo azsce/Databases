@@ -6,7 +6,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 import styles from './styles.module.css';
 
 export default function HomepageFeatures(): ReactNode {
-  const imageUrl = useBaseUrl('/img/favicon.png');
+  const imageUrl = useBaseUrl('/img/logo.png');
   
   return (
     <section className={styles.features}>

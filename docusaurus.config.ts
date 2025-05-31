@@ -10,7 +10,7 @@ const baseUrl = isProd ? "/Databases/" : "/";
 const config: Config = {
   title: "Database",
   tagline: "Database",
-  favicon: "img/favicon.png",
+  favicon: "favicon/favicon.ico",
 
   // Set the production url of your site here
   url: "https://azsce.github.io",
